@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Chat.App.Pages.ChatPage"
+             xmlns:viewModels="clr-namespace:Chat.App.ViewModels"
+             x:DataType="viewModels:ChatViewModel"
+             Title="ChatPage">
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="8">
+        <Label Text="{Binding State, StringFormat='Connection State: {0}'}" />
+
+        <CollectionView x:Name="collectionMessages" ItemsSource="{Binding Messages}" VerticalOptions="FillAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:Message">
+                    <Frame BackgroundColor="Transparent">
+                        <StackLayout>
+                            <Label Text="{Binding Id}" />
+                            <Label Text="{Binding Text}" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <HorizontalStackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+            <Entry Keyboard="Chat" Placeholder="Message" HorizontalOptions="FillAndExpand" Text="{Binding Text}" />
+            <Button Command="{Binding SendMessageCommand}" Text="Send" HorizontalOptions="End" />
+        </HorizontalStackLayout>
+    </StackLayout>
+</ContentPage>
